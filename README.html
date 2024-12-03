@@ -1,0 +1,94 @@
+<h1 id="computing-for-life-sciences-final-project">Computing for Life Sciences Final Project</h1>
+<p>Created December 2024 by Abigail Greenway</p>
+<h2 id="project--assignment-goals">Project / Assignment Goals</h2>
+<h3 id="program-purpose">Program Purpose</h3>
+<p>I want this program to help me quickly understand my cohort&#39;s behavior data from SPSS. This will help me assign experimental groups, which is a process we need done frequently and quickly.</p>
+<p>We need our groups to have similar behavior histories (lever presses, infusions) to be able to say our manipulation actually caused the difference between them. We save data in SPSS to run statistics and move it to Prism for graphing.</p>
+<p><strong>Graphs are the easiest way to find specific individuals that are making a group uneven (and importantly, visual data are what my PI wants to see). BUT: Prism has an entirely different data layout from SPSS, which is tedious to manage.</strong></p>
+<p>If I can have a program just read my SPSS data, graph it, and annotate it, I wouldn&#39;t need Prism for graphs that I need frequently and quickly.</p>
+<p><em>I originally discussed a program that processes raw output files from our operant chambers. It turns out 1) these files need to be exported, and 2) the lab already has an excel file that can bin the exported data. Instead, the project I&#39;ve described above isn&#39;t currently automated, and I think it will help me if not the whole lab.</em> </p>
+<h3 id="things-i-want-this-code-to-do">Things I want this code to do:</h3>
+<p><strong>Use concepts introduced in the class:</strong></p>
+<ol>
+<li>Organize the program into folders</li>
+<li>Section the code into modules for ease of use and debugging</li>
+<li>Batch process files, don&#39;t read / process individually</li>
+<li>Optimize, lint, notate (comment), and document (readme) the program</li>
+</ol>
+<p><strong>Process my data:</strong></p>
+<ol>
+<li>Read in my .csvs from SPSS correctly, not as strings</li>
+<li>Recognize groups and sort subjects into them</li>
+<li>Calculate some basic information and statistics about the groups</li>
+<li>Output this information to the &quot;data&quot; folder</li>
+<li>Plot behavior data over time for the groups</li>
+<li>Output this information to the &quot;plots&quot; folder</li>
+</ol>
+<p><em>Wishlist of bonus features:</em></p>
+<ol>
+<li>Recognize outlier subjects and recommend them for removal from the group.</li>
+<li>Graphs that are really nice to look at.</li>
+<li>Extremely simple execution (click the python file and it&#39;s done) so that my noncoding colleagues can use this.</li>
+</ol>
+<h2 id="data-layout">Data Layout</h2>
+<p>This program will run on an SPSS file template that organizes data based on the stage of behavior that the animals are in. You can see the appendix for a more detailed explanation of the project and timeline.</p>
+<table>
+<thead>
+<tr>
+<th>Column Name</th>
+<th>Data Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ID</td>
+<td>Rat ID, values are DT01 - DT23</td>
+</tr>
+<tr>
+<td>Sex</td>
+<td>0 = Male, 1 = Female</td>
+</tr>
+<tr>
+<td>Group</td>
+<td>0 = No react (control), 1 = React (experimental)</td>
+</tr>
+<tr>
+<td>Weight</td>
+<td>Rat&#39;s weight on certain days throughout the paradigm</td>
+</tr>
+<tr>
+<td>SA.Act.XX</td>
+<td># of active (correct) lever presses on the XX day of SA</td>
+</tr>
+<tr>
+<td>SA.Inact.XX</td>
+<td># of inactive (incorrect) lever presses on the XX day of SA</td>
+</tr>
+<tr>
+<td>SA.Inf.XX</td>
+<td># of infusions on the XX day of SA</td>
+</tr>
+<tr>
+<td>EXT.Act</td>
+<td># of active (correct) lever presses on the XX day of EXT</td>
+</tr>
+<tr>
+<td>EXT.Inact</td>
+<td># of inactive (incorrect) lever presses on the XX day of EXT</td>
+</tr>
+</tbody></table>
+<p>There are BLANK columns that hold a value of # for visual organization between behavior stages in SPSS, which is like if Excel were purposefully ugly and uncustomizeable.</p>
+<p>There are also REACT columns which are always 0 (no lever available), and pEXT / TEST columns which are unused for this pilot cohort.</p>
+<h2 id="appendix-behavioral-model-of-relapse">Appendix: Behavioral Model of Relapse</h2>
+<p>We run a context-induced reinstatement model of cocaine relapse in order to study memory reconsolidation. This means we&#39;re interested in the facts that:</p>
+<ol>
+<li>One discrete context (flooring, smell, sound, and light) can indicate that drugs are available, and</li>
+<li>Exposure to the cocaine-associated context represents the activation of neuronal circuits that hold or  modify the memory, which makes neuronal plasticity much more likely (Hebb says you first have to &quot;fire&quot; in order to &quot;wire&quot;). This makes the drug memory temporarily susceptible to manipulation.</li>
+</ol>
+<p>These concepts have been used therapeutically to reduce the strength of associations in negative valence diseases, like PTSD and phobias (exposure therapy). We are trying to use it to find out what brain regions and neuronal mechanisms are required for a positive valence disease - drug abuse.</p>
+<h3 id="behavioral-schedule">Behavioral Schedule</h3>
+<ol>
+<li><strong>SA: Self-Administration Days 1-10:</strong> Rats learn to respond (lever presses) for cocaine (infusions) in one context</li>
+<li><strong>EXT: Extinction Days 1-7:</strong> Rats extinguish responding in another context; responding generally high on the first day (&quot;where&#39;s my cocaine?!&quot;) and trends to 0 by day 7</li>
+<li><strong>REACT: Reactivation Day 1:</strong> Rats are returned to the cocaine context (no cocaine access, just exposure to the context). There should be no data for these days, as the levers are not available.</li>
+</ol>
+<p>This is where my pilot cohort ends, as we were only interested in viral tracers and neuron activity during REACT and didn&#39;t do a manipulation. The SPSS file is set up like a full project, with EXT and TEST columns, but they are unused.</p>
